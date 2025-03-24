@@ -119,13 +119,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    padding: 50,
+    paddingTop: 20,
+    paddingHorizontal: 24,
   },
   heading: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: "bold",
-    marginBottom: 20,
+    textAlign: "center",
+    marginBottom: 10,
+    color:"#ffffff",
   },
   searchInput:{
     backgroundColor: "#ffffff",
@@ -145,12 +147,12 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     width: "100%",
-    paddingHorizontal: 10,
+    paddingHorizontal: 25,
   },
   row: {
-    flexDirection: "column",
-    justifyContent: "space-between",
-    marginBottom: 16,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
   },
 });
 
