@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, View, ScrollView, TextInput } from 'react-native';
 import ProductCard from "../components/ProductCard";
-import {Picker} from '@react-native-picker/picker';
+import {Picker} from "@react-native-picker/picker";
 
 import tomnookpillow from "../images/tomnookpillow.png";
 import pikachuplush from "../images/pokemonplush.png";
