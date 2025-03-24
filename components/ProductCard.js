@@ -8,7 +8,9 @@ const ProductCard = ({title, subtitle, image, price, onPress}) => {
 
     return (
         <View style={StyleSheet.card}>
-           <Image source={image} style={styles.image}/>
+            <View style={styles.imageContainer}>
+                <Image source={image} style={styles.image} resizeMode="contain"/>
+            </View>
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.subtitle}>{subtitle}</Text>            
             <Text style={styles.price}>€{price}</Text>
@@ -29,10 +31,18 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         borderRadius: 8,
         marginBottom: 4,
+        alignItems: "center",
+    },
+    imageContainer: {
+        width: "100%",
+        height: 150,
+        borderRadius: 8,
+        justifyContent: "center",
+        alignItems: "center",
     },
     image: {
         width: "100%",
-        height: 150,
+        height: "100%",
         borderRadius: 8,
     },
     title: {
