@@ -7,7 +7,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 const DetailsScreen = ({route}) => {
-  const { title, subtitle, price, image } = route.params;
+  const {product} = route.params;
+  const {image, title, subtitle, price} = product; //Haal de productgegevens op uit de route parameters 
   const [ quantity, setQuantity ] = useState(1); //Gebruik een state voor het productaantal
 
   const increaseQuantity = () => setQuantity(quantity + 1); //Verhoog het aantal
