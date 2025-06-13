@@ -12,6 +12,7 @@ import zeldafigurine from "../images/zeldafigurine.png";
 import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
+//De categorienamen voor de producten
 const categoryNames = {
   "": "Alle categorieën",
   "67c2e227cb5553738eb07ce9": "the sims",
@@ -26,7 +27,9 @@ const HomeScreen = ({ navigation }) => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOption, setSortOption] = useState("price-asc");
+  const [loading, setLoading] = useState(true);
 
+  //Haal de productdata op 
   useEffect(() => {
     fetch(
       "https://api.webflow.com/v2/sites/67b09f6b8bdd71cbd0dff793/products",
@@ -52,14 +55,42 @@ const HomeScreen = ({ navigation }) => {
         )
       )
       .catch((err) => console.error("Error:", err));
+
+    //Haal de blogdata op
+    fetch(
+      "https://api.webflow.com/v2/sites/67b09f6b8bdd71cbd0dff793/collections",
+      {
+        headers: {
+          Authorization:
+          "Bearer 6f97acd5d1686eed67de72234f01dcda9caae49910b3fa2357439cbb7cbab51e",
+          "accept-version": "1.0.0",
+        },
+      }
+    )
+    .then((res) => res.json())
+    .then((data) => {
+      setBlogs(data.items);
+      setLoading(false); //zet de Loading op false nadat de blogs zijn geladen
+    })
+    .catch((err) => console.error("Error:", err));
   }, []);
 
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+
+  //Filter de producten op basis van zoekopdracht en categorie
   const filteredProducts = products.filter(
     (p) =>
     (selectedCategory === "" || p.category === selectedCategory) &&
     p.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
   
+  //Sorteer de producten
   const sortedProducts = [...filteredProducts].sort((a, b) => {
     if (sortOption === "price-asc") return a.price - b.price; //prijs oplopend
     if (sortOption === "price-desc") return b.price - a.price; //prijs aflopend
@@ -83,6 +114,7 @@ const HomeScreen = ({ navigation }) => {
         </Picker>
       </View>
 
+      {/* Zoekfunctie */}
       <TextInput
         style={styles.searchInput}
         placeholder="Zoek op productnaam..."
@@ -90,6 +122,7 @@ const HomeScreen = ({ navigation }) => {
         onChangeText={setSearchQuery}
       />
 
+      {/* Categorie selectie */}
       <Picker
         selectedValue={selectedCategory}
         onValueChange={setSelectedCategory}
@@ -101,6 +134,7 @@ const HomeScreen = ({ navigation }) => {
         ))}
       </Picker>
 
+      {/* Weergave van de producten */}
       <ScrollView style={styles.cardContainer}>
         <View style={styles.row}>
           {sortedProducts.map((product) => (
@@ -112,10 +146,26 @@ const HomeScreen = ({ navigation }) => {
           ))}
       </View>
       </ScrollView>
+
+      {/*Blogs selectie*/}
+      <Text style={styles.heading}>Check out our blog</Text>
+      <ScrollView style={styles.cardContainer}>
+        <View style={styles.row}>
+      {blogs.map((blog) => (
+        <BlogCard
+          key={blog.id}
+          title={blog.name}
+          subtitle={blog.description}
+          image={blog.image}
+          onPress={() => navigation.navigate("BlogDetail", { blogId: blog.id, blog: blog })}
+        />
+      ))}
+        </View>
+      </ScrollView>
       <StatusBar style="auto" />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
