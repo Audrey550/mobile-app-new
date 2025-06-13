@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, View, ScrollView, TextInput } from 'react-native';
+import { useCart } from '../context/cartContext';
 import ProductCard from "../components/ProductCard";
 import BlogCard from "../components/BlogCard";
 import {Picker} from "@react-native-picker/picker";
@@ -20,7 +21,6 @@ const categoryNames = {
   "67bf813e465ad432c0ef9d92": "animal crossing",
   "67bf8080ae053bc9000e3945": "pokémon",
 };
-
 
 const HomeScreen = ({ navigation }) => {
   const [products, setProducts] = useState([]);
@@ -255,6 +255,13 @@ const styles = StyleSheet.create({
     marginTop: 16,
     textAlign: "center",
   },
+  card: {
+    padding: 10,
+    marginBottom: 20,
+    backgroundColor: "#2f2f2f",
+    borderRadius: 8,
+  },
 });
 
 export default HomeScreen;
+export { ProductCard };
