@@ -22,6 +22,7 @@ const categoryNames = {
 
 const HomeScreen = ({ navigation }) => {
   const [products, setProducts] = useState([]);
+  const [blogs, setBlogs] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOption, setSortOption] = useState("price-asc");
