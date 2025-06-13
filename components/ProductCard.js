@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
         height: "100%",
     },
     title: {
+        color:"#ffffff",
         fontSize: 18,
         fontWeight: "bold",
         marginTop: 8,
@@ -53,14 +54,14 @@ const styles = StyleSheet.create({
     },
     subtitle: {
         fontSize: 14,
-        color: "#000000",
+        color: "#ffffff",
         marginTop: 5,
     },
     price: {
         fontSize: 14,
         fontWeight: "bold",
-        color: "#000000",
-        marginTop: 4,
+        color: "#ffffff",
+        marginTop: 5,
     },
     button: {
         backgroundColor: "#00FF00",
