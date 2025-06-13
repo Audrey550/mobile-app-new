@@ -17,7 +17,7 @@ const BlogCard = ({ title, subtitle, image, publishDate, onPress }) => {
     return (
         <View style={StyleSheet.card}>
             <View style={styles.imageContainer}>
-                <Image source={image} style={styles.image} resizeMode="contain"/>
+                <Image source={image} style={styles.image} resizeMode="cover"/>
             </View>
 
             {/* numberOfLines is een prop om de titel af te kappen als deze te lang is */}
@@ -58,24 +58,26 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 18,
+        color: "#ffffff",
         fontWeight: "bold",
         marginTop: 8,
     },
     subtitle: {
         fontSize: 14,
-        color: "#000000",
+        color: "#ffffff",
         marginTop: 5,
     },
     button: {
-        backgroundColor: "#007BFF",
-        paddingVertical: 6,
-        paddingHorizontal: 12,
-        borderRadius: 4,
-        marginTop: 10,
+        backgroundColor: "#00bfff",
+        alignItems: "center",
+        padding: 16,
+        borderRadius: 8,
+        marginTop: 8,
+        marginBottom: 8,
     },
     buttonText: {
-        color: "#fff",
-        fontSize: 14,
+        color: "#000000",
+        fontWeight: "bold",
     },
 });
 

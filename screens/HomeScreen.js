@@ -113,7 +113,7 @@ const HomeScreen = ({ navigation }) => {
 
     return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Bekijk onze producten</Text>
+      <Text style={styles.heading}>Gear Up. Game On!</Text>
       <View style={styles.pickerContainer}>
         <Picker
           selectedValue={sortOption}
@@ -147,25 +147,28 @@ const HomeScreen = ({ navigation }) => {
         ))}
       </Picker>
 
-      {/* Weergave van de producten */}
+      {/* Weergave van de Producten en Blogs */}
       <ScrollView style={styles.cardContainer}>
-        <View style={styles.row}>
-          {sortedProducts?.map((product) => (
-            <ProductCard
-              key={product.id}
-              {...product}
-              onPress={() => navigation.navigate("Details", { product })}
-            />
-          ))}
-      </View>
-      </ScrollView>
 
-      {/*Blogs selectie*/}
-      <Text style={styles.heading}>Check out our blog</Text>
-      <ScrollView style={styles.cardContainer}>
+        { /* Producten Sectie */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Our Products</Text>
+          <View style={styles.row}>
+            {sortedProducts?.map((product) => (
+              <ProductCard
+                key={product.id}
+                {...product}
+                onPress={() => navigation.navigate("Details", { product })}
+              />
+            ))}
+          </View>
+        </View>
+
+      {/*Blogs Sectie*/}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Check out our blog</Text>
         <View style={styles.row}>
       {blogs?.map((blog) => {
-        console.log("BLog data:", blog);
         return (
         <BlogCard
           key={blog.id}
@@ -178,16 +181,28 @@ const HomeScreen = ({ navigation }) => {
       );
       })}
         </View>
+      </View>
       </ScrollView>
       <StatusBar style="auto" />
     </View>
   );
 };
 
+/*Kleurencodes:
+  Background: #171717
+  Product card background: #2f2f2f
+  Product card text: #ffffff
+  Product card button: #45ff45
+  Blog card background: #2f2f2f
+  Blog card text: #ffffff
+  Blog card button: #4580ff
+*/
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#171717',
     paddingTop: 20,
     paddingHorizontal: 24,
   },
@@ -200,11 +215,11 @@ const styles = StyleSheet.create({
   },
   searchInput:{
     backgroundColor: "#ffffff",
+    color: "#000000",
     borderRadius: 10,
     padding: 10,
     fontSize: 16,
     marginBottom: 20,
-    color: "#000",
   },
   pickerContainer: {
     backgroundColor: "#ffffff",
@@ -214,7 +229,13 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginBottom: 20,
   },
+  picker: {
+    height: 50,
+    width: "100%",
+    color: "#000000",
+  },
   cardContainer: {
+    backgroundColor: "#2f2f2f",
     width: "100%",
     paddingHorizontal: 25,
   },
@@ -222,6 +243,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-around",
+  },
+  section: {
+    marginBottom: 30,
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#ffffff",
+    marginBottom: 16,
+    marginTop: 16,
+    textAlign: "center",
   },
 });
 
