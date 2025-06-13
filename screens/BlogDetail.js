@@ -1,19 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { use, useEffect, useState } from 'react';
-import { StyleSheet, Image, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Image, Text, View } from 'react-native';
 import BlogCard from "../components/BlogCard";
 
 import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 const BlogDetail = ({route}) => {
-    const {blogId} = route.params;
     const {title, subtitle, image, content} = route.params.blog; //Haal de bloggegevens op uit de route parameters
 
     return (
         <View style={styles.container}>
             <Image 
-                source={image} style={styles.image}/>
+                source={{ uri: image.uri }} style={styles.image}/>
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.subtitle}>{subtitle}</Text>            
             <Text style={styles.content}>{content}</Text>

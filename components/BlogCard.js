@@ -2,18 +2,28 @@ import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-const BlogCard = ({ title, subtitle, image, onPress }) => {
-const navigation = useNavigation();
+
+const BlogCard = ({ title, subtitle, image, publishDate, onPress }) => {
+    const navigation = useNavigation();
+
+    //Formateer de publicartiedatum
+    const formattedDate = publishDate ? new Date(publishDate).toLocaleDateString("nl-NL", {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+    }) 
+    : "Onbekend";
 
     return (
-        <View style={styles.card}>
+        <View style={StyleSheet.card}>
             <View style={styles.imageContainer}>
-                <Image source={image} style={styles.image} resizeMode="cover" />
+                <Image source={image} style={styles.image} resizeMode="contain"/>
             </View>
 
             {/* numberOfLines is een prop om de titel af te kappen als deze te lang is */}
             <Text style={styles.title} numberOfLines={1}>{title}</Text>
-            <Text style={styles.subtitle} numberOfLines={2}>{subtitle}</Text>            
+            <Text style={styles.subtitle} numberOfLines={1}>{formattedDate}</Text>
+            <Text style={styles.subtitle} numberOfLines={2}>{subtitle}</Text>
 
             {/*Lees meer knop*/}
             <TouchableOpacity

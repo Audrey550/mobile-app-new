@@ -21,6 +21,7 @@ const categoryNames = {
   "67bf8080ae053bc9000e3945": "pokémon",
 };
 
+
 const HomeScreen = ({ navigation }) => {
   const [products, setProducts] = useState([]);
   const [blogs, setBlogs] = useState([]);
@@ -58,18 +59,30 @@ const HomeScreen = ({ navigation }) => {
 
     //Haal de blogdata op
     fetch(
-      "https://api.webflow.com/v2/sites/67b09f6b8bdd71cbd0dff793/collections",
+      "https://api.webflow.com/v2/sites/67b09f6b8bdd71cbd0dff793/collections/67bb65b5de30948f36de87c8/items",
       {
         headers: {
           Authorization:
           "Bearer 6f97acd5d1686eed67de72234f01dcda9caae49910b3fa2357439cbb7cbab51e",
-          "accept-version": "1.0.0",
         },
       }
     )
     .then((res) => res.json())
     .then((data) => {
-      setBlogs(data.items);
+      if(data?.items && Array.isArray(data.items)) { //Check of de data.items een array is
+      setBlogs(data.items.map((item) => ({
+        id: item.id,
+        title: item.fieldData.name,
+        summary: item.fieldData["post-summary"],
+        image: { uri: item.fieldData["main-image"]?.url},
+        content: item.fieldData["post-body"],
+        publishDate: item.fieldData["publish-date"],
+      })));
+
+      } else {
+        console.error("Invalid blog data format:", data);
+      }
+
       setLoading(false); //zet de Loading op false nadat de blogs zijn geladen
     })
     .catch((err) => console.error("Error:", err));
@@ -151,15 +164,19 @@ const HomeScreen = ({ navigation }) => {
       <Text style={styles.heading}>Check out our blog</Text>
       <ScrollView style={styles.cardContainer}>
         <View style={styles.row}>
-      {blogs?.map((blog) => (
+      {blogs?.map((blog) => {
+        console.log("BLog data:", blog);
+        return (
         <BlogCard
           key={blog.id}
-          title={blog.name}
-          subtitle={blog.description}
+          title={blog.title}
+          subtitle={blog.summary}
           image={blog.image}
-          onPress={() => navigation.navigate("BlogDetail", { blogId: blog.id, blog: blog })}
+          publishDate={blog.publishDate}
+          onPress={() => navigation.navigate("Blog", { blogId: blog.id, blog: blog })}
         />
-      ))}
+      );
+      })}
         </View>
       </ScrollView>
       <StatusBar style="auto" />
