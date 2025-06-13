@@ -84,18 +84,18 @@ const HomeScreen = ({ navigation }) => {
   }
 
   //Filter de producten op basis van zoekopdracht en categorie
-  const filteredProducts = products.filter(
+  const filteredProducts = products?.filter(
     (p) =>
     (selectedCategory === "" || p.category === selectedCategory) &&
     p.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
   
   //Sorteer de producten
-  const sortedProducts = [...filteredProducts].sort((a, b) => {
+  const sortedProducts = [...filteredProducts]?.sort((a, b) => {
     if (sortOption === "price-asc") return a.price - b.price; //prijs oplopend
     if (sortOption === "price-desc") return b.price - a.price; //prijs aflopend
     if (sortOption === "name-asc") return a.title.localeCompare(b.title); //naam a-z
-    if (sortOption === "name-asc") return b.title.localeCompare(a.title); //naam z-a
+    if (sortOption === "name-desc") return b.title.localeCompare(a.title); //naam z-a
   });
 
     return (
@@ -137,7 +137,7 @@ const HomeScreen = ({ navigation }) => {
       {/* Weergave van de producten */}
       <ScrollView style={styles.cardContainer}>
         <View style={styles.row}>
-          {sortedProducts.map((product) => (
+          {sortedProducts?.map((product) => (
             <ProductCard
               key={product.id}
               {...product}
@@ -151,7 +151,7 @@ const HomeScreen = ({ navigation }) => {
       <Text style={styles.heading}>Check out our blog</Text>
       <ScrollView style={styles.cardContainer}>
         <View style={styles.row}>
-      {blogs.map((blog) => (
+      {blogs?.map((blog) => (
         <BlogCard
           key={blog.id}
           title={blog.name}

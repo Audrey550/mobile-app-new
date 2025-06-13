@@ -39,16 +39,17 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         justifyContent: "center",
         alignItems: "center",
+        overflow: "hidden",
     },
     image: {
         width: "100%",
         height: "100%",
-        borderRadius: 8,
     },
     title: {
         fontSize: 18,
         fontWeight: "bold",
         marginTop: 8,
+        textAlign: "center",
     },
     subtitle: {
         fontSize: 14,
