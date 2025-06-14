@@ -1,14 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Image, Text, View, TouchableOpacity } from 'react-native';
+import { View, Text, Image, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import ProductCard from "../components/ProductCard";
 
 import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
-const DetailsScreen = ({route}) => {
+const ProductDetail = ({route}) => {
   const {product} = route.params;
-  const {image, title, subtitle, price} = product; //Haal de productgegevens op uit de route parameters 
+  console.log("Product details:", product); //Log de productgegevens naar de console
+  const {image, name, description, price} = product; //Haal de productgegevens op uit de route parameters 
   const [ quantity, setQuantity ] = useState(1); //Gebruik een state voor het productaantal
 
   const increaseQuantity = () => setQuantity(quantity + 1); //Verhoog het aantal
@@ -22,9 +23,9 @@ const DetailsScreen = ({route}) => {
     <View style={styles.container}>
         <Image 
           source={image} style={styles.image}/>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.subtitle}>{subtitle}</Text>            
-        <Text style={styles.price}>€{price}</Text>
+        <Text style={styles.title}>{product?.title}</Text>
+        <Text style={styles.description}>{product?.subtitle}</Text>            
+        <Text style={styles.price}>€{product?.price}</Text>
 
         <View style={styles.quantity}>
           <TouchableOpacity style={styles.button} onPress={decreaseQuantity}>
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 10,
   },
-  subtitle: {
+  description: {
     fontSize: 18,
     marginBottom: 8,
     width: "80%",
@@ -86,4 +87,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DetailsScreen;
+export default ProductDetail;

@@ -242,7 +242,8 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
+    marginBottom: 20,
   },
   section: {
     marginBottom: 30,

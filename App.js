@@ -18,6 +18,9 @@ export default function App() {
   return (
     <CartProvider>
     <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="HomeTabs" options={{headerShown: false}}>
+        {() => (
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({color, size}) => {
@@ -34,6 +37,11 @@ export default function App() {
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Cart" component={CartScreen} />
       </Tab.Navigator>
+      )}
+        </Stack.Screen>
+        <Stack.Screen name="Details" component={ProductDetail} />
+        <Stack.Screen name="Blog" component={BlogDetail} />
+      </Stack.Navigator>
     </NavigationContainer>
     </CartProvider>
   );

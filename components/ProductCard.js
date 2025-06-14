@@ -4,25 +4,31 @@ import { useNavigation } from "@react-navigation/native";
 
 
 const ProductCard = ({title, subtitle, image, price, onPress}) => {
+    console.log("ProductCard:", price);
+
     const navigation = useNavigation();
+  
 
     return (
-        <View style={StyleSheet.card}>
+        <View style={styles.card}>
             <View style={styles.imageContainer}>
                 <Image source={image} style={styles.image} resizeMode="contain"/>
             </View>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.subtitle}>{subtitle}</Text>            
-            <Text style={styles.price}>€{price}</Text>
+            <Text style={styles.name}>{title}</Text>
+            <Text style={styles.description} numberOfLines={2}>{subtitle}</Text>            
+            <Text style={styles.price}>€{price.toFixed(2)}</Text>
 
+            {/* Details knop */}
             <TouchableOpacity
                 style={styles.button}
-                onPress={onPress}>
+                onPress={() => navigation.navigate("Details", { product: { title, subtitle, image, price } })}>
                 <Text style={styles.buttonText}>Details</Text>
-                </TouchableOpacity>
+            </TouchableOpacity>
         </View>
     );
 };
+
+
 
 const styles = StyleSheet.create({
     card: {
@@ -59,7 +65,6 @@ const styles = StyleSheet.create({
     },
     price: {
         fontSize: 14,
-        fontWeight: "bold",
         color: "#ffffff",
         marginTop: 5,
     },
