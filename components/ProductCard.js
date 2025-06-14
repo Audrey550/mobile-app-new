@@ -1,11 +1,11 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useWishlist } from "../context/wishlistContext";
 
 
 const ProductCard = ({title, subtitle, image, price, id, onPress}) => {
-    console.log("ProductCard:", price);
-
+    const { addToWishlist } = useWishlist();
     const navigation = useNavigation();
   
     return (
@@ -17,10 +17,19 @@ const ProductCard = ({title, subtitle, image, price, id, onPress}) => {
             <Text style={styles.description} numberOfLines={2}>{subtitle}</Text>            
             <Text style={styles.price}>${price || "0.00"}</Text>
 
+            {/* Add to Wishlist knop */}
+            <TouchableOpacity
+                style={styles.wishlistButton}
+                onPress={() => addToWishlist({ id, title, subtitle, image, price })}>
+                <View>
+                <Text style={styles.wishlistButtonText}>🩷 </Text>
+                </View>
+            </TouchableOpacity> 
+
             {/* Details knop */}
             <TouchableOpacity
                 style={styles.button}
-                onPress={() => navigation.navigate("Details", { product: { title, subtitle, image, price, id } })}>
+                onPress={() => navigation.navigate("Details", { product: { id, title, subtitle, image, price } })}>
                 <Text style={styles.buttonText}>Details</Text>
             </TouchableOpacity>
         </View>
@@ -87,6 +96,19 @@ const styles = StyleSheet.create({
         color: "#000000",
         fontWeight: "bold",
     },
+    wishlistButton: {
+        alignItems: "center",
+        justifyContent: "center",
+        padding: 10,
+        marginTop: 8,
+        width: "auto",
+    },
+    wishlistButtonText: {
+        fontSize: 20,
+        letterSpacing: 20,
+        textAlign: "center",
+        includeFontPadding: false,
+    }
 });
 
 export default ProductCard;

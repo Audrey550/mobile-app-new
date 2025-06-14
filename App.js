@@ -10,6 +10,7 @@ import {CartProvider} from "./context/cartContext.js";
 import ProductDetail from "./screens/ProductDetail.js";
 import BlogDetail from "./screens/BlogDetail.js";
 import ProductScreen from './screens/ProductScreen.js';
+import { WishlistProvider } from './context/wishlistContext.js';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -41,6 +42,7 @@ const BottomTabNavigator = () => {
 export default function App() {
   return (
     <CartProvider>
+      <WishlistProvider>
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="HomeTabs" options={{headerShown: false}}>
@@ -53,6 +55,7 @@ export default function App() {
           <Stack.Screen name="Blog" component={BlogDetail} />
         </Stack.Navigator>
       </NavigationContainer>
+      </WishlistProvider>
     </CartProvider>
   );
 }
