@@ -1,3 +1,4 @@
+//Importeer React
 import { StatusBar } from 'expo-status-bar';
 import React, { use, useEffect, useState } from 'react';
 import { StyleSheet, Image, Text, View, ScrollView } from 'react-native';
@@ -28,12 +29,13 @@ const BlogDetail = ({route}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#2f2f2f',
         alignItems: 'center',
         justifyContent: 'center',
         padding: 16,
     },
     title: {
+        color: '#ffffff',
         fontSize: 24,
         fontWeight: "bold",
         marginBottom: 10,
@@ -41,7 +43,7 @@ const styles = StyleSheet.create({
     },
     subtitle: {
         fontSize: 18,
-        color: "#666",
+        color: "#ffffff",
         marginBottom: 10,
     },
     image: {
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
     },
     content: {
         fontSize: 16,
-        color: "#333",
+        color: "#ffffff",
         marginTop: 10,
     }
 });

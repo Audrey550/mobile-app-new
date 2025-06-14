@@ -1,3 +1,4 @@
+//Import React
 import React from 'react';
 import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import {useCart} from '../context/cartContext';

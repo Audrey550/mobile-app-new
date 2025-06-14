@@ -1,9 +1,11 @@
+//Importeer React en de benodigde componenten voor navigatie en iconen
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+// Importeer de schermen
 import HomeScreen from "./screens/HomeScreen.js";
 import CartScreen from "./screens/cartScreen.js";
 import {CartProvider} from "./context/cartContext.js";
@@ -13,9 +15,11 @@ import ProductScreen from './screens/ProductScreen.js';
 import WishlistScreen from './screens/WishlistScreen.js';
 import { WishlistProvider } from './context/wishlistContext.js';
 
+// Maak de navigatie stacks en tab navigators aan
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
+//Defineer de bottom tab navigator met iconen voor elke tabblad
 const BottomTabNavigator = () => {
   return (
   <Tab.Navigator
@@ -44,8 +48,10 @@ const BottomTabNavigator = () => {
   );
 }
 
+//Hoofdcomponent van de app
 export default function App() {
   return (
+    //Omgeef de app met providers zodat de cart/wishlist overal beschikbaar is
     <CartProvider>
       <WishlistProvider>
       <NavigationContainer>

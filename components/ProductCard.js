@@ -1,14 +1,14 @@
+//Importeer React en componenten van React Native en React Navigation
 import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useWishlist } from "../context/wishlistContext";
 
-
+//Component voor het tonen van een productkaart
 const ProductCard = ({title, subtitle, image, price, id, onPress}) => {
-    const navigation = useNavigation();
-    const { addToWishlist } = useWishlist();
+    const navigation = useNavigation(); //Navigatiehook voor doorklikken naar detailpagina
+    const { addToWishlist } = useWishlist(); //Contextfunctie om product toe te voegen aan de verlanglijst
 
-  
     return (
         <View style={styles.card}>
             <View style={styles.imageContainer}>
@@ -47,6 +47,7 @@ const ProductCard = ({title, subtitle, image, price, id, onPress}) => {
   Blog card button: #4580ff
 */
 
+/*Stijlen voor de productkaart en zijn onderdelen */
 const styles = StyleSheet.create({
     card: {
         width: 150,
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
     },
     wishlistButtonText: {
         fontSize: 20,
-        letterSpacing: 20,
+        letterSpacing: 20, //Zorg voor voldoende ruimte rondom de emoji
         textAlign: "center",
         includeFontPadding: false,
     }

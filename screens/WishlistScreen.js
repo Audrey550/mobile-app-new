@@ -1,3 +1,4 @@
+//Importeer React
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
 import { useWishlist } from '../context/wishlistContext';

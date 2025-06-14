@@ -1,3 +1,4 @@
+//Importeer React
 import React, { createContext, useContext, useState } from 'react';
 
 //Context aanmaken voor de verlanglijst

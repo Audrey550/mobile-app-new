@@ -1,18 +1,19 @@
+//importeer React en react-native componenten
 import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-
+//Component die één blog-item weergeeft in kaartvorm
 const BlogCard = ({ title, subtitle, image, publishDate, onPress }) => {
     const navigation = useNavigation();
 
-    //Formateer de publicartiedatum
+    //Formateer de publicartiedatum naar bijvoorbeeld "01-01-2023"
     const formattedDate = publishDate ? new Date(publishDate).toLocaleDateString("nl-NL", {
         day: '2-digit',
         month: '2-digit',
         year: 'numeric',
     }) 
-    : "Onbekend";
+    : "Onbekend"; //Fallback als de datum ontbreekt
 
     return (
         <View style={StyleSheet.card}>
@@ -35,11 +36,12 @@ const BlogCard = ({ title, subtitle, image, publishDate, onPress }) => {
     );
 }
 
+//Stijlobject voor visuele opmaak van de kaart 
 const styles = StyleSheet.create({
     card: {
         width: 150,
         padding: 8,
-        backgroundColor: "#fff",
+        backgroundColor: "#2f2f2f",
         borderRadius: 8,
         marginBottom: 4,
         alignItems: "center",
