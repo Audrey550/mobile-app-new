@@ -5,8 +5,9 @@ import { useWishlist } from "../context/wishlistContext";
 
 
 const ProductCard = ({title, subtitle, image, price, id, onPress}) => {
-    const { addToWishlist } = useWishlist();
     const navigation = useNavigation();
+    const { addToWishlist } = useWishlist();
+
   
     return (
         <View style={styles.card}>

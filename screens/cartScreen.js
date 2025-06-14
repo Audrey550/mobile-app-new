@@ -44,7 +44,7 @@ const CartScreen = () => {
                 </>
             ) : (
                 <View style={styles.emptyCartContainer}>
-                    <Text style={styles.emptyCartText}>Your cart is empty</Text>
+                    <Text style={styles.emptyCartText}>Your cart is empty ☹️</Text>
                     <TouchableOpacity style={styles.goHomeButton} onPress={() => navigation.navigate('Home')}>
                         <Text style={styles.goHomeText}>Go to Home</Text>
                     </TouchableOpacity>
@@ -134,17 +134,16 @@ const styles = StyleSheet.create({
         marginTop: 50,
     },
     goHomeButton: {
-        backgroundColor: '#4580ff',
+      backgroundColor: "#4580ff",
         padding: 10,
         borderRadius: 8,
-        fontWeight: 'bold',
         marginTop: 20,
+        alignItems: "center",
     },
     goHomeText: {
-        color: '#171717',
-        fontSize: 18,
-        fontWeight: 'bold',
-        textAlign: 'center',
+        color: "#171717",
+        fontSize: 16,
+        fontWeight: "bold",
     },
     totalContainer: {
         marginTop: 20,
