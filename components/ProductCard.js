@@ -3,12 +3,11 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 
-const ProductCard = ({title, subtitle, image, price, onPress}) => {
+const ProductCard = ({title, subtitle, image, price, id, onPress}) => {
     console.log("ProductCard:", price);
 
     const navigation = useNavigation();
   
-
     return (
         <View style={styles.card}>
             <View style={styles.imageContainer}>
@@ -16,25 +15,33 @@ const ProductCard = ({title, subtitle, image, price, onPress}) => {
             </View>
             <Text style={styles.name}>{title}</Text>
             <Text style={styles.description} numberOfLines={2}>{subtitle}</Text>            
-            <Text style={styles.price}>€{price.toFixed(2)}</Text>
+            <Text style={styles.price}>${price || "0.00"}</Text>
 
             {/* Details knop */}
             <TouchableOpacity
                 style={styles.button}
-                onPress={() => navigation.navigate("Details", { product: { title, subtitle, image, price } })}>
+                onPress={() => navigation.navigate("Details", { product: { title, subtitle, image, price, id } })}>
                 <Text style={styles.buttonText}>Details</Text>
             </TouchableOpacity>
         </View>
     );
 };
 
-
+/*Kleurencodes:
+  Background: #171717
+  Product card background: #2f2f2f
+  Product card text: #ffffff
+  Product card button: #45ff45
+  Blog card background: #2f2f2f
+  Blog card text: #ffffff
+  Blog card button: #4580ff
+*/
 
 const styles = StyleSheet.create({
     card: {
         width: 150,
         padding: 8,
-        backgroundColor: "#fff",
+        backgroundColor: "#2f2f2f",
         borderRadius: 8,
         marginBottom: 4,
         alignItems: "center",
@@ -51,14 +58,14 @@ const styles = StyleSheet.create({
         width: "100%",
         height: "100%",
     },
-    title: {
+    name: {
         color:"#ffffff",
         fontSize: 18,
         fontWeight: "bold",
         marginTop: 8,
         textAlign: "center",
     },
-    subtitle: {
+    description: {
         fontSize: 14,
         color: "#ffffff",
         marginTop: 5,

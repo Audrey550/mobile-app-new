@@ -42,19 +42,26 @@ const HomeScreen = ({ navigation }) => {
       }
     )
       .then((res) => res.json())
-      .then((data) => 
+      .then((data) => {
         setProducts(
-          data.items.map((item) => ({
+          data.items.map((item) => {
+            if(!item.product.id) {
+              console.error("Product ID ontbreekt:", item);
+            }
+
+            const priceInUSD = item.skus[0]?.fieldData.price.value / 100; //Prijs in USD, gedeeld door 100 omdat de API de prijs in centen geeft
+            return {
             id: item.product.id,
             title: item.product.fieldData.name,
             subtitle: item.product.fieldData.description,
-            price: (item.skus[0]?.fieldData.price.value || 0) / 100,
+            price: priceInUSD,
             image: {uri: item.skus[0]?.fieldData["main-image"]?.url},
             category:
               categoryNames[item.product.fieldData.category[0]] || "Onbekend",
-          }))
-        )
-      )
+          };
+        })
+      );
+      })
       .catch((err) => console.error("Error:", err));
 
     //Haal de blogdata op
@@ -141,7 +148,7 @@ const HomeScreen = ({ navigation }) => {
         onValueChange={setSelectedCategory}
         style={styles.picker}
       >
-        <Picker.Item label="Alle categorieën" value="" />
+        <Picker.Item label="Alle categorieën" value=""/>
         {[...new Set(products.map((p) => p.category))].map((category) => (
           <Picker.Item key={category} label={category} value={category} />
         ))}
@@ -157,7 +164,11 @@ const HomeScreen = ({ navigation }) => {
             {sortedProducts?.map((product) => (
               <ProductCard
                 key={product.id}
-                {...product}
+                id={product.id}
+                title={product.title}
+                subtitle={product.subtitle}
+                image={product.image}
+                price={product.price}
                 onPress={() => navigation.navigate("Details", { product })}
               />
             ))}
@@ -198,7 +209,6 @@ const HomeScreen = ({ navigation }) => {
   Blog card button: #4580ff
 */
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -232,7 +242,7 @@ const styles = StyleSheet.create({
   picker: {
     height: 50,
     width: "100%",
-    color: "#000000",
+    color: "#ffffff",
   },
   cardContainer: {
     backgroundColor: "#2f2f2f",
