@@ -10,6 +10,7 @@ import CartScreen from "./screens/cartScreen.js";
 import {CartProvider} from "./context/cartContext.js";
 import ProductDetail from "./screens/ProductDetail.js";
 import BlogDetail from "./screens/BlogDetail.js";
+import ProductScreen from './screens/ProductScreen.js';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -39,6 +40,7 @@ export default function App() {
       </Tab.Navigator>
       )}
         </Stack.Screen>
+        <Stack.Screen name="Products" component={ProductScreen} />
         <Stack.Screen name="Details" component={ProductDetail} />
         <Stack.Screen name="Blog" component={BlogDetail} />
       </Stack.Navigator>

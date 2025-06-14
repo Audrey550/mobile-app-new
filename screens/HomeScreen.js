@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, Text, View, ScrollView, TextInput } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 import { useCart } from '../context/cartContext';
 import ProductCard from "../components/ProductCard";
 import BlogCard from "../components/BlogCard";
@@ -121,18 +121,12 @@ const HomeScreen = ({ navigation }) => {
     return (
     <View style={styles.container}>
       <Text style={styles.heading}>Gear Up. Game On!</Text>
-      <View style={styles.pickerContainer}>
-        <Picker
-          selectedValue={sortOption}
-          onValueChange={setSortOption}
-          style={styles.picker}
-        >
-          <Picker.Item label="Prijs (laag-hoog)" value="price-asc" />
-          <Picker.Item label="Prijs (hoog-laag)" value="price-desc" />
-          <Picker.Item label="Naam A-Z" value="name-asc" />
-          <Picker.Item label="Naam Z-A" value="name-desc" />
-        </Picker>
-      </View>
+      { /* Navigatieknop naar de Productenpagina */}
+      <TouchableOpacity style={styles.productButton} onPress={() => navigation.navigate("Products")}>
+        <Text style={styles.productButtonText}>Bekijk alle producten</Text>
+      </TouchableOpacity>
+
+      
 
       {/* Zoekfunctie */}
       <TextInput
@@ -141,18 +135,6 @@ const HomeScreen = ({ navigation }) => {
         value={searchQuery}
         onChangeText={setSearchQuery}
       />
-
-      {/* Categorie selectie */}
-      <Picker
-        selectedValue={selectedCategory}
-        onValueChange={setSelectedCategory}
-        style={styles.picker}
-      >
-        <Picker.Item label="Alle categorieën" value=""/>
-        {[...new Set(products.map((p) => p.category))].map((category) => (
-          <Picker.Item key={category} label={category} value={category} />
-        ))}
-      </Picker>
 
       {/* Weergave van de Producten en Blogs */}
       <ScrollView style={styles.cardContainer}>
@@ -271,6 +253,18 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     backgroundColor: "#2f2f2f",
     borderRadius: 8,
+  },
+  productButton: {
+    backgroundColor: "#45ff45",
+    padding: 10,
+    borderRadius: 8,
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  productButtonText: {
+    color: "#000000",
+    fontWeight: "bold",
+    fontSize: 16,
   },
 });
 
